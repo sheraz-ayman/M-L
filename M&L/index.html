@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mohammed & Lorena — Wedding Invitation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #faf6f2;
+      --rose: #c0706a;
+      --rose-light: #e8b4b0;
+      --dark: #2a2018;
+      --muted: #8a7968;
+      --card-bg: #ffffff;
+      --border: #ede8e1;
+      --shadow: 0 2px 20px rgba(42,32,24,0.07);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Floral SVG background decoration */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(ellipse 60% 40% at 5% 15%, rgba(192,112,106,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 60% at 95% 80%, rgba(192,112,106,0.07) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Decorative line art */
+    .bg-art {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .page-wrapper {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      padding: 40px 20px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    /* MAIN CARD */
+    .main-card {
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(10px);
+      border-radius: 24px;
+      box-shadow: 0 8px 60px rgba(42,32,24,0.10);
+      max-width: 1100px;
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      flex-direction: row;
+      animation: fadeUp 0.9s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* LEFT — Photo */
+    .photo-col {
+      flex: 0 0 38%;
+      min-height: 600px;
+      background: linear-gradient(160deg, #e8d5c8 0%, #d4b8aa 100%);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-col img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-placeholder {
+      text-align: center;
+      color: #b09080;
+      padding: 40px;
+    }
+    .photo-placeholder svg { opacity: 0.4; margin-bottom: 12px; }
+    .photo-placeholder p { font-size: 13px; font-family: 'Jost', sans-serif; letter-spacing: 0.05em; }
+
+    /* RIGHT — Content */
+    .content-col {
+      flex: 1;
+      padding: 48px 44px 44px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      overflow-y: auto;
+    }
+
+    /* Header label */
+    .eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      color: var(--muted);
+      text-transform: uppercase;
+      text-align: center;
+    }
+    .eyebrow-dot {
+      display: block;
+      width: 6px; height: 6px;
+      background: var(--rose);
+      border-radius: 50%;
+      margin: 6px auto 0;
+    }
+
+    /* Names */
+    .names-section { text-align: center; }
+    .names {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(44px, 7vw, 64px);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--dark);
+      letter-spacing: -0.01em;
+    }
+    .names .ampersand {
+      color: var(--rose);
+      font-style: italic;
+      font-weight: 400;
+    }
+    .tagline {
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.7;
+      max-width: 360px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Info boxes */
+    .info-boxes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .info-box {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 12px;
+      text-align: center;
+    }
+    .info-box .label {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      margin-bottom: 6px;
+    }
+    .info-box .label svg { flex-shrink: 0; }
+    .info-box .value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--dark);
+      line-height: 1.25;
+    }
+
+    /* Section card */
+    .section-card {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px 20px;
+    }
+    .section-label {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    /* Location */
+    .location-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--dark);
+      line-height: 1.2;
+    }
+    .location-city {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 3px;
+      font-weight: 300;
+    }
+    .map-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 7px 16px;
+      font-size: 12px;
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      color: var(--dark);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .map-btn:hover { background: var(--dark); color: #fff; border-color: var(--dark); }
+    .map-btn:hover svg path { stroke: #fff; }
+
+    /* Countdown */
+    .countdown-date {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 14px;
+      font-weight: 300;
+    }
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    .countdown-unit {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 14px 8px;
+      text-align: center;
+      border: 1px solid var(--border);
+    }
+    .countdown-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 34px;
+      font-weight: 600;
+      color: var(--dark);
+      line-height: 1;
+      display: block;
+    }
+    .countdown-label {
+      font-size: 8px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    /* RSVP */
+    .rsvp-text {
+      font-size: 12.5px;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.65;
+      margin-bottom: 6px;
+    }
+    .confirmed-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+    .confirmed-dot {
+      width: 6px; height: 6px;
+      background: #7db87d;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .rsvp-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--dark);
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      padding: 12px 22px;
+      font-size: 13px;
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--rose); transform: translateY(-1px); }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--dark);
+      border: 1.5px solid var(--border);
+      border-radius: 30px;
+      padding: 12px 22px;
+      font-size: 13px;
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--dark); background: var(--dark); color: #fff; }
+
+    /* Bottom tips row */
+    .tips-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      border-top: 1px solid var(--border);
+      background: rgba(255,255,255,0.6);
+      padding: 20px;
+      border-radius: 30px;
+      margin-top: 10px;
+    }
+    .tip-card {
+      padding: 28px 24px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--card-bg);
+    }
+    .tip-card:last-child { border-right: 1px solid var(--border); }
+    .tip-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 8px;
+      font-style: italic;
+    }
+    .tip-text {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.65;
+    }
+
+    /* MOBILE */
+    @media (max-width: 760px) {
+      .page-wrapper { padding: 0; }
+      .main-card { flex-direction: column; border-radius: 0; min-height: 100vh; }
+      .photo-col { flex: 0 0 300px; min-height: 300px; }
+      .content-col { padding: 32px 22px 28px; gap: 22px; }
+      .names { font-size: 46px; }
+      .tips-row { grid-template-columns: 1fr; gap: 12px; }
+      .countdown-num { font-size: 26px; }
+      .info-box .value { font-size: 15px; }
+    }
+
+    @media (max-width: 420px) {
+      .info-boxes { grid-template-columns: 1fr; }
+      .countdown-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background decorative SVG -->
+  <svg class="bg-art" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <!-- left floral curves -->
+    <path d="M-60 200 Q80 100 60 300 Q40 500 -40 400" stroke="#c0706a" stroke-width="1" stroke-opacity="0.15" fill="none"/>
+    <path d="M-40 350 Q30 280 10 420 Q-10 560 -60 500" stroke="#c0706a" stroke-width="0.8" stroke-opacity="0.1" fill="none"/>
+    <circle cx="30" cy="170" r="4" fill="#c0706a" fill-opacity="0.12"/>
+    <circle cx="55" cy="300" r="2.5" fill="#c0706a" fill-opacity="0.1"/>
+    <!-- right floral -->
+    <path d="M1500 600 Q1360 500 1380 700 Q1400 900 1480 800" stroke="#c0706a" stroke-width="1" stroke-opacity="0.15" fill="none"/>
+    <path d="M1480 450 Q1400 380 1420 520 Q1440 660 1500 590" stroke="#c0706a" stroke-width="0.8" stroke-opacity="0.1" fill="none"/>
+    <circle cx="1400" cy="640" r="4" fill="#c0706a" fill-opacity="0.12"/>
+    <circle cx="1430" cy="750" r="2.5" fill="#c0706a" fill-opacity="0.1"/>
+  </svg>
+
+  <div class="page-wrapper">
+    <div style="max-width:1100px; width:100%; display:flex; flex-direction:column; gap:0;">
+
+      <!-- MAIN CARD -->
+      <div class="main-card">
+
+        <!-- LEFT: Photo -->
+        <div class="photo-col">
+          <img src="./WhatsApp Image 2026-03-26 at 8.10.36 PM (1).jpeg" style="width:100%; height:100%; object-fit:cover; display:block;" alt="Mohammed and Lorena" />
+        </div>
+
+        <!-- RIGHT: Content -->
+        <div class="content-col">
+
+          <!-- Eyebrow -->
+          <div class="eyebrow">
+            Wedding Invitation
+            <span class="eyebrow-dot"></span>
+          </div>
+
+          <!-- Names + tagline -->
+          <div class="names-section">
+            <div class="names">Mohammed <span class="ampersand">&</span><br/>Lorena</div>
+            <p class="tagline">Together with their families, they joyfully invite you to celebrate their wedding day and share a beautiful evening filled with love, elegance, and unforgettable memories.</p>
+          </div>
+
+          <!-- Date / Time / Venue boxes -->
+          <div class="info-boxes">
+            <div class="info-box">
+              <div class="label">
+                <svg width="10" height="10" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="2" stroke="#8a7968" stroke-width="1.5"/><path d="M5 1v3M11 1v3M2 7h12" stroke="#8a7968" stroke-width="1.5" stroke-linecap="round"/></svg>
+                Date
+              </div>
+              <div class="value">24 June<br/>2026</div>
+            </div>
+            <div class="info-box">
+              <div class="label">
+                <svg width="10" height="10" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#8a7968" stroke-width="1.5"/><path d="M8 5v3.5l2.5 1.5" stroke="#8a7968" stroke-width="1.5" stroke-linecap="round"/></svg>
+                Time
+              </div>
+              <div class="value">6:00 PM</div>
+            </div>
+            <div class="info-box">
+              <div class="label">
+                <svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M8 2C5.8 2 4 3.8 4 6c0 3.3 4 8 4 8s4-4.7 4-8c0-2.2-1.8-4-4-4z" stroke="#8a7968" stroke-width="1.5"/><circle cx="8" cy="6" r="1.5" stroke="#8a7968" stroke-width="1.2"/></svg>
+                Venue
+              </div>
+              <div class="value">Schlosscafe<br/>im Palmenhaus</div>
+            </div>
+          </div>
+
+          <!-- Location -->
+          <div class="section-card">
+            <div class="section-label">Location</div>
+            <div class="location-name">Schlosscafe im Palmenhaus</div>
+            <div class="location-city">Munich, Germany</div>
+            <a class="map-btn" href="https://maps.google.com/?q=Schlosscafe+im+Palmenhaus+Munich" target="_blank">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 2C5.8 2 4 3.8 4 6c0 3.3 4 8 4 8s4-4.7 4-8c0-2.2-1.8-4-4-4z" stroke="#2a2018" stroke-width="1.5"/><circle cx="8" cy="6" r="1.5" stroke="#2a2018" stroke-width="1.2"/></svg>
+              View on Map
+            </a>
+          </div>
+
+          <!-- Countdown -->
+          <div class="section-card">
+            <div class="section-label">Countdown to Our Day</div>
+            <div class="countdown-date">Wednesday, June 24, 2026 at 6:00 PM</div>
+            <div class="countdown-grid">
+              <div class="countdown-unit"><span class="countdown-num" id="cd-days">--</span><span class="countdown-label">Days</span></div>
+              <div class="countdown-unit"><span class="countdown-num" id="cd-hours">--</span><span class="countdown-label">Hours</span></div>
+              <div class="countdown-unit"><span class="countdown-num" id="cd-mins">--</span><span class="countdown-label">Minutes</span></div>
+              <div class="countdown-unit"><span class="countdown-num" id="cd-secs">--</span><span class="countdown-label">Seconds</span></div>
+            </div>
+          </div>
+
+          <!-- RSVP -->
+          <div class="section-card">
+            <div class="section-label">RSVP</div>
+            <p class="rsvp-text">Kindly confirm your attendance through the RSVP form. Your response is stored live, and the guest count updates automatically on the site.</p>
+            <!-- <div class="confirmed-badge">
+              <span class="confirmed-dot"></span> Confirmed Guests —
+            </div> -->
+            <div class="rsvp-buttons">
+              <a class="btn-primary" href="https://forms.google.com" target="_blank">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2 4h12v9a1 1 0 01-1 1H3a1 1 0 01-1-1V4z" stroke="#fff" stroke-width="1.3"/><path d="M2 4l6 5 6-5" stroke="#fff" stroke-width="1.3"/></svg>
+                RSVP Now
+              </a>
+              <a class="btn-secondary" href="/cdn-cgi/l/email-protection#14797b7c757979717054716c75796478713a777b79">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2 4h12v9a1 1 0 01-1 1H3a1 1 0 01-1-1V4z" stroke="currentColor" stroke-width="1.3"/><path d="M2 4l6 5 6-5" stroke="currentColor" stroke-width="1.3"/></svg>
+                Contact Us
+              </a>
+            </div>
+          </div>
+
+        </div><!-- /content-col -->
+      </div><!-- /main-card -->
+
+      <!-- BOTTOM TIPS ROW -->
+      <div class="tips-row">
+        <div class="tip-card">
+          <div class="tip-title">Dress beautifully</div>
+          <p class="tip-text">Join us for an elegant evening of celebration, warmth, and unforgettable moments.</p>
+        </div>
+        <div class="tip-card">
+          <div class="tip-title">Venue access</div>
+          <p class="tip-text">Tap the map button above for directions to the venue in Munich and easy navigation on the day.</p>
+        </div>
+        <div class="tip-card">
+          <div class="tip-title">RSVP early</div>
+          <p class="tip-text">Please send your RSVP as soon as possible so we can prepare a wonderful evening for everyone attending.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Countdown to June 24, 2026 6:00 PM Munich time (UTC+2 in summer)
+    const weddingDate = new Date('2026-06-24T18:00:00+02:00');
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = weddingDate - now;
+
+      if (diff <= 0) {
+        document.getElementById('cd-days').textContent = '0';
+        document.getElementById('cd-hours').textContent = '0';
+        document.getElementById('cd-mins').textContent = '0';
+        document.getElementById('cd-secs').textContent = '0';
+        return;
+      }
+
+      const days  = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins  = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const secs  = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('cd-days').textContent  = String(days).padStart(2,'0');
+      document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+      document.getElementById('cd-mins').textContent  = String(mins).padStart(2,'0');
+      document.getElementById('cd-secs').textContent  = String(secs).padStart(2,'0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
